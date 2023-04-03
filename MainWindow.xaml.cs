@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,10 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.IO;
-using Osztalyok;
 
-namespace TartalyWPF
+namespace WPFTartalyok
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -27,22 +26,21 @@ namespace TartalyWPF
         public MainWindow()
         {
             InitializeComponent();
+            rdoKocka.IsChecked= true;
         }
 
         private void btnFelvesz_Click(object sender, RoutedEventArgs e)
         {
-            btnDuplaz.IsEnabled = true;
-            btnLeenged.IsEnabled = true;
             ujTest = new Tartaly(txtNev.Text, Convert.ToInt32(txtAel.Text), Convert.ToInt32(txtBel.Text), Convert.ToInt32(txtCel.Text));
             tartalyok.Add(ujTest);
+            lbTartalyok.ItemsSource = tartalyok;
             lbTartalyok.Items.Refresh();
-            StreamWriter streamWriter = new StreamWriter("tartaly.csv", append: true);
-            streamWriter.Close();
         }
 
         private void btnRogzit_Click(object sender, RoutedEventArgs e)
         {
-
+            StreamWriter streamWriter = new StreamWriter("tartaly.csv", append: true);
+            streamWriter.Close();
         }
 
         private void btnDuplaz_Click(object sender, RoutedEventArgs e)
